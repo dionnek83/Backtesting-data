@@ -19,7 +19,8 @@ var price = document.getElementById("price").value;
 var stop = document.getElementById("stop").value;
 var resultElement = document.getElementById('profit-price');
 var profit = document.getElementById('profit');
-
+var pro_pips = document.getElementById('profit-pips');
+var los_pips = document.getElementById('loss-pips');
 
 var profit_price = getProfitValue(risk_to_reward_ratio,price,stop,sell_or_buy,type,price,resultElement);
 
@@ -27,6 +28,22 @@ resultElement.innerHTML = 'Profit price ' + profit_price;
       
 
 profit.value = profit_price;
+
+
+// GET PROFIT PIPS 
+
+var profit_pips = getProfitPips(risk_to_reward_ratio,price,stop,sell_or_buy,type)
+    
+pro_pips.value = profit_pips;
+
+// GET STOP LOSS PIPS 
+var loss_pips = getLossPips(risk_to_reward_ratio,price,stop,sell_or_buy,type)
+
+los_pips.value = loss_pips; 
+
+
+
+//var loss_pips = getLossPips(risk_to_reward_ratio,stop,stop,sell_or_buy,type)
 
 // SEND DATA TO GOOGLE SHEET -----------------------------------
 
@@ -62,11 +79,11 @@ function getProfitValue(risk,price,stop,tradeType,type,open,resultElement){
     if (type == "Non-Yen"){
         // Get the pips difference between stop loss and open price 
      numberOfPips = getPipsDifference(price, stop, 4,tradeType);
-        console.log('Number of pips:', numberOfPips);
+        // console.log('Number of pips:', numberOfPips);
     
     }else {
          numberOfPips = getPipsDifference(price, stop, 2, tradeType);
-        console.log('Number of pips:', numberOfPips);
+        // console.log('Number of pips:', numberOfPips);
     }
 
     // double or triple value if 1:1 just add the pips 
@@ -85,21 +102,21 @@ function getProfitValue(risk,price,stop,tradeType,type,open,resultElement){
             profit_pips = numberOfPips * 3;
       }
 
-      console.log("Profit pips : " + profit_pips);
+    //  console.log("Profit pips : " + profit_pips);
 
     //add the pips to open price to get profit value 
     if (type == "Non-Yen"){
         const conversionFactor = Math.pow(10, 4);
         const rateChange = profit_pips / conversionFactor;
-console.log("rateChange" + rateChange)
+//console.log("rateChange" + rateChange)
 var newRate;
        if(tradeType == "Buy"){
          newRate = parseFloat(open) + parseFloat(rateChange);
-         console.log("Buy price" + newRate.toFixed(4))
+      //   console.log("Buy price" + newRate.toFixed(4))
        }
        else{
         newRate = parseFloat(open) - parseFloat(rateChange);
-        console.log("Sell price" + newRate.toFixed(4))
+        //console.log("Sell price" + newRate.toFixed(4))
        }
        return newRate.toFixed(4); 
       
@@ -118,3 +135,55 @@ var newRate;
         return newRate.toFixed(2); 
     }
 }
+
+
+function getProfitPips(risk,price,stop,tradeType,type,){
+  var numberOfPips;
+
+  if (type == "Non-Yen"){
+      // Get the pips difference between stop loss and open price 
+   numberOfPips = getPipsDifference(price, stop, 4,tradeType);
+      // console.log('Number of pips:', numberOfPips);
+  
+  }else {
+       numberOfPips = getPipsDifference(price, stop, 2, tradeType);
+      // console.log('Number of pips:', numberOfPips);
+  }
+
+  // double or triple value if 1:1 just add the pips 
+  var profit_pips;
+  switch(risk) {
+      case "1:1":
+        profit_pips = numberOfPips;
+        break;
+      case "2:1":
+          profit_pips = numberOfPips * 2;
+        break;
+        case "3:1":
+          profit_pips = numberOfPips * 3;
+        break;
+      default:
+          profit_pips = numberOfPips * 3;
+    }
+
+    //console.log("Profit pips to send : " + profit_pips)
+  
+    return profit_pips
+  }
+
+  function getLossPips(risk,price,stop,tradeType,type,){
+    var numberOfPips;
+  
+    if (type == "Non-Yen"){
+        // Get the pips difference between stop loss and open price 
+     numberOfPips = getPipsDifference(price, stop, 4,tradeType);
+         //console.log('Number of loss pips:', numberOfPips);
+       
+    
+    }else {
+         numberOfPips = getPipsDifference(price, stop, 2, tradeType);
+         //console.log('Number of loss pips:', numberOfPips);
+        
+    }
+    return numberOfPips;
+  }

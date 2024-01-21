@@ -15,9 +15,10 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(166,169,233,1) 
 form{
     border-radius: 20px;
     margin-top: 20px !important;
-    width: 35% !important;
+    min-width: 45% !important;
     background-color: white !important;
     padding: 20px 50px;
+    width: 45% !important;
 }
 
  .btn-primary{
@@ -45,3 +46,11 @@ form{
  }
 
 
+ /* @media screen and (max-width: 768px) {
+    form{
+        border-radius: 20px;
+        margin-top: 20px !important;
+        width: 100% !important;
+
+    }
+ } */
