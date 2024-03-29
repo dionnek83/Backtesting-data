@@ -11,6 +11,10 @@ form.addEventListener('submit', e =>{
 
 
         // TRADE DATA 
+var open_trade_date = document.getElementById("open-trade-date").value;
+var open_trade_time = document.getElementById("open-trade-time").value;
+var close_trade_date = document.getElementById("close-trade-date").value;
+var close_trade_time = document.getElementById("close-trade-time").value;
 var risk_to_reward_ratio = document.getElementById("risk").value;
 var pair = document.getElementById("pair").value;
 var sell_or_buy = document.getElementById("sell-buy").value;
@@ -21,6 +25,8 @@ var resultElement = document.getElementById('profit-price');
 var profit = document.getElementById('profit');
 var pro_pips = document.getElementById('profit-pips');
 var los_pips = document.getElementById('loss-pips');
+var profitm = document.getElementById('profit-money');
+var lossm = document.getElementById('loss-money');
 
 var profit_price = getProfitValue(risk_to_reward_ratio,price,stop,sell_or_buy,type,price,resultElement);
 
@@ -36,10 +42,16 @@ var profit_pips = getProfitPips(risk_to_reward_ratio,price,stop,sell_or_buy,type
     
 pro_pips.value = profit_pips;
 
+var profit_money = profit_pips * 0.01; 
+profitm.value = profit_money;
+
 // GET STOP LOSS PIPS 
 var loss_pips = getLossPips(risk_to_reward_ratio,price,stop,sell_or_buy,type)
 
 los_pips.value = loss_pips; 
+
+var loss_money = loss_pips * 0.01; 
+lossm.value = loss_money;
 
 
 
@@ -53,7 +65,17 @@ los_pips.value = loss_pips;
 
 },
 
+// )
+
+//---------------------------------
+// console.log("Open trade date " + open_trade_date + `\n` + "Open trade time " + open_trade_time  + `\n` + "Close trade date " + close_trade_date + `\n` +
+// "Close trade time " + close_trade_time  + `\n` + "Risk to reward " + risk_to_reward_ratio + `\n` + "Currency pair " + pair + `\n` + "Pair type " + type + `\n`+ 
+// "Trade type " + sell_or_buy + `\n` + "Open price " + price + `\n` + "Stop loss " + stop + `\n` + "Profit price " + profit_price + `\n` + "Profit pips " + profit_pips + `\n` +
+// "Loss pips " + loss_pips + `\n`+ "Profit money " + profit_money + `\n`+ "Loss money " + loss_money );
+
 )
+
+//------------------------------------------
 //.then(()=> {window.location.reload();})
 
 
@@ -137,7 +159,7 @@ var newRate;
 }
 
 
-function getProfitPips(risk,price,stop,tradeType,type,){
+function getProfitPips(risk,price,stop,tradeType,type){
   var numberOfPips;
 
   if (type == "Non-Yen"){
@@ -187,3 +209,4 @@ function getProfitPips(risk,price,stop,tradeType,type,){
     }
     return numberOfPips;
   }
+

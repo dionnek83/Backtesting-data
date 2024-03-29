@@ -10,26 +10,54 @@
   <body>
     
   
-        <div class="container my-3 h-100 d-flex justify-content-center align-items-center vh-100">
+        <div class="container my-3 h-100 d-flex justify-content-center align-items-center vh-50">
         <form class="" id="myForm" method="post" >
             <h4 class="text-center mb-4">Back-test</h4>
             <div class="container ">
 
               <div class="row ">
-                <div class="col col-md-6">
+                <div class="col-sm-4 ">
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Open Trade Date</label>
+  <div class="">
+  <input type="date" id="open-trade-date" name="open-trade-date">
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Open Trade Time</label>
+  <div class="">
+    <input type="time" id="open-trade-time" name="open-trade-time">
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Close Trade Date</label>
+  <div class="">
+  <input type="date" id="close-trade-date" name="close-trade-date">
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Close Trade Time</label>
+  <div class="">
+    <input type="time" id="close-trade-time" name="close-trade-time">
+  </div>
+</div>
             <div class="mb-3 ">
               <label for="exampleInputPassword1" class="form-label">Risk to reward ratio</label>
                <div class="">
               <select class="form-control" name="Risk-to-Reward-Ratio" id="risk">
-                <option value="1:1">1:1</option>
+                <!-- <option value="1:1">1:1</option> -->
                 <option value="2:1">2:1</option>
                 <option value="3:1">3:1</option>
               </select>
               </div>
             </div>
+            </div>
 
          
-
+            <div class="col-sm-4">
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Currency pair</label>
               <input type="text" name="Pair" class="form-control" id="pair">
@@ -39,9 +67,8 @@
               <label for="exampleInputPassword1" class="form-label">Pair type</label>
                <div class="">
               <select class="form-control" name="Pair-Type" id="type">
-                <option value="Non-Yen">Non-Yen</option>
                 <option value="Yen">Yen</option>
-                
+                <option value="Non-Yen">Non-Yen</option>
               </select>
               </div>
             </div>
@@ -56,9 +83,10 @@
               </select>
               </div>
             </div>
-</div>
+            </div>
+
             <!-- NEXT COLUMN  -->
-            <div class="col-16 col-md-6 ">
+            <div class="col-sm-4">
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Open price</label>
                 <input type="text" name="Open-Price" class="form-control" id="price">
@@ -75,6 +103,8 @@
                 <input type="hidden" name="Take-Profit" class="form-control" id="profit" >
                 <input type="hidden" name="Take-Profit-Pips" class="form-control" id="profit-pips" >
                 <input type="hidden" name="Loss-Pips" class="form-control" id="loss-pips" >
+                <input type="hidden" name="PMoney" class="form-control" id="profit-money" >
+                <input type="hidden" name="LMoney" class="form-control" id="loss-money" >
                 
              
           
